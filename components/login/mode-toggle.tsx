@@ -1,4 +1,4 @@
-type Mode = "secure" | "friendly";
+import type { Mode } from "@/lib/types"
 
 interface ModeToggleProps {
     mode: Mode;
