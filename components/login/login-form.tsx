@@ -1,5 +1,7 @@
 "use client";
 
+import styles from "./login-form.module.scss";
+
 import { useState } from "react";
 import type { FormErrors, Mode } from "@/lib/types";
 import { validateLoginForm } from "@/lib/validation";
