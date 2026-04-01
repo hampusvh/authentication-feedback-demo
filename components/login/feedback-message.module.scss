@@ -1,0 +1,23 @@
+.feedback {
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--border);
+}
+
+.text {
+    margin: 0;
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.success {
+    color: var(--success);
+}
+
+.error {
+    color: var(--error);
+}
+
+.info {
+    color: var(--text);
+}

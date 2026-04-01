@@ -1,8 +1,10 @@
 # Secure Login UX Case Study
 
-A small frontend project exploring a simple question:
+A small frontend case study exploring how authentication feedback impacts user experience and security.
 
 **How much should a login form actually tell the user?**
+
+This project demonstrates how different feedback strategies affect both usability and security perception.
 
 ---
 
@@ -10,34 +12,34 @@ A small frontend project exploring a simple question:
 
 This app simulates a login flow with two modes:
 
-* **Friendly** → specific, helpful feedback
-* **Secure** → generic, safer feedback
+* **Friendly** → specific, helpful feedback  
+* **Secure** → generic, safer feedback  
 
-Same input → same auth result → different message depending on mode.
+Same input → same authentication result → different message depending on mode.
 
 ---
 
 ## Try it
 
-Use these credentials:
+Use the following credentials to test different scenarios:
 
 **Valid login**
 
-* Email: `demo@example.com`
-* Password: `Password123`
+* Email: `demo@example.com`  
+* Password: `Password123`  
 
 **Test cases**
 
-* Wrong password
-  → correct email + wrong password
+* Wrong password  
+  → correct email + wrong password  
 
-* Account not found
-  → any other email
+* Account not found  
+  → any other email  
 
-* Too many attempts
-  → repeat failed attempts
+* Too many attempts  
+  → repeat failed attempts  
 
-Switch between **Friendly** and **Secure** to see how the feedback changes.
+Switch between **Friendly** and **Secure** to compare how the feedback changes.
 
 ---
 
@@ -46,8 +48,8 @@ Switch between **Friendly** and **Secure** to see how the feedback changes.
 ```text
 Submit form
 → validate input
-→ simulate auth
-→ apply message policy
+→ simulate authentication
+→ apply feedback strategy
 → display feedback
 ```
 
@@ -57,7 +59,7 @@ The key idea:
 
 ---
 
-## Structure
+## Project structure
 
 ```
 app/
@@ -77,23 +79,23 @@ lib/
 
 ## Key parts
 
-* `fake-auth.ts`
-  Simulates backend responses
+* `fake-auth.ts`  
+  Simulates authentication responses  
 
-* `auth-message-policy.ts`
-  Decides what the user sees based on mode
+* `auth-message-policy.ts`  
+  Determines what the user sees based on selected mode  
 
-* `login-form.tsx`
-  Connects everything together
+* `login-form.tsx`  
+  Connects validation, auth simulation, and feedback logic  
 
 ---
 
 ## Why this matters
 
-Login feedback seems simple, but it involves tradeoffs:
+Login feedback seems simple, but it involves real tradeoffs:
 
-* Too much information → security risk
-* Too little information → bad UX
+* Too much information → increased attack surface  
+* Too little information → poor user experience  
 
 This project isolates that decision in the frontend.
 
@@ -101,13 +103,13 @@ This project isolates that decision in the frontend.
 
 ## Notes
 
-* No real backend (fully simulated)
-* UI intentionally simple
+* No real backend (fully simulated)  
+* UI intentionally minimal  
 * Focus is on behavior, not design
 
 ---
 
 ## Takeaway
 
-Frontend is not just about displaying data —
-it's about deciding **how much to communicate, and when**.
+Frontend is not just about displaying data —  
+it's about deciding **what to communicate, how, and when**.
