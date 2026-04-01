@@ -1,12 +1,15 @@
 "use client";
 
-import styles from "./login-form.module.scss";
-
 import { useState } from "react";
+
+import { getAuthMessage } from "@/lib/auth-message-policy";
+import { fakeAuth } from "@/lib/fake-auth";
 import type { FormErrors, Mode } from "@/lib/types";
 import { validateLoginForm } from "@/lib/validation";
-import ModeToggle from "./mode-toggle";
+
 import FeedbackMessage from "./feedback-message";
+import styles from "./login-form.module.scss";
+import ModeToggle from "./mode-toggle";
 
 export default function LoginForm() {
     const [mode, setMode] = useState<Mode>("secure");
@@ -15,8 +18,9 @@ export default function LoginForm() {
     const [errors, setErrors] = useState<FormErrors>({});
     const [feedback, setFeedback] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [attemptCount, setAttemptCount] = useState(0);
 
-    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
         setFeedback("");
@@ -29,7 +33,27 @@ export default function LoginForm() {
         if (hasErrors) {
             return;
         }
-        console.log("Validation passed");
+        setIsLoading(true);
+
+        const authResult = await fakeAuth({
+            email,
+            password,
+            attemptCount,
+        });
+
+        setIsLoading(false);
+        if (authResult.success) {
+            setAttemptCount(0);
+        } else {
+            setAttemptCount((current) => current + 1);
+        }
+        const message = getAuthMessage({
+            mode,
+            reason: authResult.reason,
+        });
+        setFeedback(message);
+
+        console.log(authResult);
     }
 
     return (

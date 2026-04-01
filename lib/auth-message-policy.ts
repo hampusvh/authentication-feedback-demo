@@ -1,4 +1,4 @@
-import type { Mode, AuthResultReason } from "./types";
+import type { AuthResultReason,Mode } from "./types";
 
 interface GetAuthMessageInput {
     mode: Mode;
