@@ -53,37 +53,38 @@ export default function LoginForm() {
         });
         setFeedback(message);
 
-        console.log(authResult);
     }
 
     return (
-        <section>
-            <h1>Login</h1>
+        <section className={styles.wrapper}>
+            <div className={styles.panel}>
+                <h1>Login</h1>
 
-            <ModeToggle mode={mode} onChange={setMode} />
+                <ModeToggle mode={mode} onChange={setMode} />
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                    />
-                    {errors.email && <p>{errors.email}</p>}
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                    />
-                    {errors.password && <p>{errors.password}</p>}
-                </div>
-                <button type="submit">{isLoading ? "Loading..." : "Log in"}</button>
-            </form>
-            <FeedbackMessage message={feedback} />
+                <form className={styles.form} onSubmit={handleSubmit}>
+                    <div className={styles.field}>
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(event) => setEmail(event.target.value)}
+                        />
+                        {errors.email && <p className={styles.errorText}>{errors.email}</p>}
+                    </div>
+                    <div className={styles.field}>
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(event) => setPassword(event.target.value)}
+                        />
+                        {errors.password && <p className={styles.errorText}>{errors.password}</p>}
+                    </div>
+                    <button type="submit">{isLoading ? "Loading..." : "Log in"}</button>
+                </form>
+                <FeedbackMessage message={feedback} />
+            </div>
         </section>
     );
 }

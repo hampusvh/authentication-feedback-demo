@@ -1,3 +1,4 @@
+import { AUTH_CONFIG } from "./auth-config";
 import type { AuthResult } from "./types";
 
 interface FakeAuthInput {
@@ -5,9 +6,6 @@ interface FakeAuthInput {
     password: string;
     attemptCount: number;
 }
-
-const VALID_EMAIL = "demo@example.com";
-const VALID_PASSWORD = "Password123";
 
 function sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -18,23 +16,23 @@ export async function fakeAuth({
     password,
     attemptCount,
 }: FakeAuthInput): Promise<AuthResult> {
-    await sleep(1000);
+    await sleep(AUTH_CONFIG.delayMs);
 
-    if (attemptCount >= 5) {
+    if (attemptCount >= AUTH_CONFIG.maxAttempts) {
         return {
             success: false,
             reason: "TOO_MANY_ATTEMPTS",
         };
     }
 
-    if (email !== VALID_EMAIL) {
+    if (email !== AUTH_CONFIG.validEmail) {
         return {
             success: false,
             reason: "ACCOUNT_NOT_FOUND",
         };
     }
 
-    if (password !== VALID_PASSWORD) {
+    if (password !== AUTH_CONFIG.validPassword) {
         return {
             success: false,
             reason: "WRONG_PASSWORD",
