@@ -1,6 +1,11 @@
+
 # Secure Login UX Case Study
 
 A small frontend case study exploring how authentication feedback affects UX and security.
+
+<p align="center">
+  <img src="./public/preview.png" alt="Preview" width="700" />
+</p>
 
 ---
 
