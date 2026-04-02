@@ -1,4 +1,4 @@
-import type { AuthResultReason,Mode } from "./types";
+import type { AuthResultReason, Mode } from "./types";
 
 interface GetAuthMessageInput {
     mode: Mode;
@@ -12,11 +12,11 @@ export function getAuthMessage({
 
     if (mode === "friendly") {
         if (reason === "WRONG_PASSWORD") {
-            return "Incorrect password. Try again or reset your password.";
+            return "Invalid password.";
         }
 
         if (reason === "ACCOUNT_NOT_FOUND") {
-            return "No account found with this email";
+            return "No account found with this email.";
         }
 
         if (reason === "TOO_MANY_ATTEMPTS") {

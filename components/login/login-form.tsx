@@ -23,58 +23,36 @@ export default function LoginForm() {
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-
         setFeedback("");
-        setFeedbackVariant("info");
 
         const validationErrors = validateLoginForm({ email, password });
         setErrors(validationErrors);
+        if (Object.keys(validationErrors).length > 0) return;
 
-        const hasErrors = Object.keys(validationErrors).length > 0;
-
-        if (hasErrors) {
-            return;
-        }
         setIsLoading(true);
-
-        const authResult = await fakeAuth({
-            email,
-            password,
-            attemptCount,
-        });
-
+        const authResult = await fakeAuth({ email, password, attemptCount });
         setIsLoading(false);
 
         if (authResult.success) {
             setAttemptCount(0);
             setFeedbackVariant("success");
         } else {
-            setAttemptCount((current) => current + 1);
+            setAttemptCount((c) => c + 1);
             setFeedbackVariant("error");
         }
 
-        const message = getAuthMessage({
-            mode,
-            reason: authResult.reason,
-        });
-        setFeedback(message);
-
+        setFeedback(getAuthMessage({ mode, reason: authResult.reason }));
     }
 
     return (
         <section className={styles.wrapper}>
             <div className={styles.panel}>
-                <h1 className={styles.title}>
-                    Authentication Feedback Demo
-                </h1>
-                <p className={styles.subtitle}>
-                    Compare how different feedback strategies affect user experience and security.
-                </p>
-
+                <div className={styles.header}>
+                    <h1 className={styles.title}>
+                        Authentication Demo
+                    </h1>
+                </div>
                 <ModeToggle mode={mode} onChange={setMode} />
-                <p className={styles.helper}>
-                    Secure mode reveals less information. Friendly mode provides more specific feedback.
-                </p>
 
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <div className={styles.field}>
@@ -114,7 +92,7 @@ export default function LoginForm() {
                                 Authenticating...
                             </span>
                         ) : (
-                            "Sign in"
+                            "Simulate Login"
                         )}
                     </button>
                 </form>

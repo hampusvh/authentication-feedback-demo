@@ -1,4 +1,5 @@
 import type { Mode } from "@/lib/types";
+
 import styles from "./mode-toggle.module.scss";
 interface ModeToggleProps {
     mode: Mode;

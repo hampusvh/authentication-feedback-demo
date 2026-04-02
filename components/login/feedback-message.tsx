@@ -15,7 +15,11 @@ export default function FeedbackMessage({
     }
 
     return (
-        <div className={styles.feedback}>
+        <div
+            className={styles.feedback}
+            aria-live="polite"
+            role={variant === "error" ? "alert" : "status"}
+        >
             <p className={`${styles.text} ${styles[variant]}`}>{message}</p>
         </div>
     )

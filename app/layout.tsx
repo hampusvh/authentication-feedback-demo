@@ -1,10 +1,8 @@
 import "./globals.scss";
 
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "",
-  description: "",
+export const metadata = {
+  title: "Secure Login UX Case Study",
+  description: "Frontend case study on authentication feedback, usability and security",
 };
 
 export default function RootLayout({

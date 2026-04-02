@@ -1,115 +1,51 @@
 # Secure Login UX Case Study
 
-A small frontend case study exploring how authentication feedback impacts user experience and security.
-
-**How much should a login form actually tell the user?**
-
-This project demonstrates how different feedback strategies affect both usability and security perception.
+A small frontend case study exploring how authentication feedback affects UX and security.
 
 ---
 
-## What this is
+## What it is
 
-This app simulates a login flow with two modes:
+A simulated login flow with two feedback modes:
 
-* **Friendly** → specific, helpful feedback  
-* **Secure** → generic, safer feedback  
+- **Friendly** – specific, helpful messages
+- **Secure** – generic, intentionally vague messages
 
-Same input → same authentication result → different message depending on mode.
+Same input, same auth result, different message depending on mode.
 
 ---
 
 ## Try it
 
-Use the following credentials to test different scenarios:
-
-**Valid login**
-
-* Email: `demo@example.com`  
-* Password: `Password123`  
-
-**Test cases**
-
-* Wrong password  
-  → correct email + wrong password  
-
-* Account not found  
-  → any other email  
-
-* Too many attempts  
-  → repeat failed attempts  
-
-Switch between **Friendly** and **Secure** to compare how the feedback changes.
-
----
-
-## Flow
-
-```text
-Submit form
-→ validate input
-→ simulate authentication
-→ apply feedback strategy
-→ display feedback
+```bash
+npm install
+npm run dev
 ```
 
-The key idea:
+**Test credentials**
 
-> The system result is not always what the user should see.
+| Scenario | Email | Password |
+|---|---|---|
+| Valid login | `demo@example.com` | `Password123` |
+| Wrong password | `demo@example.com` | anything else |
+| Account not found | any other email | anything |
+| Too many attempts | — | repeat failed attempts |
+
+Switch between **Friendly** and **Secure** to compare feedback.
 
 ---
 
 ## Project structure
 
 ```
-app/
+lib/
+  fake-auth.ts            # Simulates auth responses
+  auth-message-policy.ts  # Maps results to user-facing messages
+  validation.ts
+  types.ts
 components/
   login/
-    login-form.tsx
+    login-form.tsx        # Main form logic
     mode-toggle.tsx
     feedback-message.tsx
-lib/
-  validation.ts
-  fake-auth.ts
-  auth-message-policy.ts
-  types.ts
 ```
-
----
-
-## Key parts
-
-* `fake-auth.ts`  
-  Simulates authentication responses  
-
-* `auth-message-policy.ts`  
-  Determines what the user sees based on selected mode  
-
-* `login-form.tsx`  
-  Connects validation, auth simulation, and feedback logic  
-
----
-
-## Why this matters
-
-Login feedback seems simple, but it involves real tradeoffs:
-
-* Too much information → increased attack surface  
-* Too little information → poor user experience  
-
-This project isolates that decision in the frontend.
-
----
-
-## Notes
-
-* No real backend (fully simulated)  
-* UI intentionally minimal  
-* Focus is on behavior, not design
-
----
-
-## Takeaway
-
-Frontend is not just about displaying data —  
-it's about deciding **what to communicate, how, and when**.
