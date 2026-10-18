@@ -1,56 +1,48 @@
-
-# Secure Login UX Case Study
-
-A small frontend case study exploring how authentication feedback affects UX and security.
+# Authentication Feedback Demo
 
 <p align="center">
-  <img src="./public/preview.png" alt="Preview" width="700" />
+  <img
+    src="./public/preview.png"
+    alt="Authentication form with selectable feedback modes"
+    width="400"
+  />
 </p>
 
----
+A frontend demonstration of how login feedback can disclose account information.
 
-## What it is
+## Overview
 
-A simulated login flow with two feedback modes:
+The demo presents two feedback modes for the same simulated authentication flow:
 
-- **Friendly** – specific, helpful messages
-- **Secure** – generic, intentionally vague messages
+- **Friendly** provides specific messages for an unknown email address or an incorrect password.
+- **Secure** returns a generic message for either failure.
 
-Same input, same auth result, different message depending on mode.
+The comparison illustrates how descriptive feedback can enable account enumeration by revealing whether an email address is associated with an account.
 
----
+The mode names reflect the interface labels. Neither mode represents a complete authentication security strategy.
 
-## Try it
+## Run locally
+
+Install dependencies and start the development server:
 
 ```bash
 npm install
 npm run dev
 ```
 
-**Test credentials**
+## Test scenarios
 
-| Scenario | Email | Password |
-|---|---|---|
-| Valid login | `demo@example.com` | `Password123` |
-| Wrong password | `demo@example.com` | anything else |
-| Account not found | any other email | anything |
-| Too many attempts | — | repeat failed attempts |
+Switch feedback modes and submit the same credentials to compare responses.
 
-Switch between **Friendly** and **Secure** to compare feedback.
+| Scenario           | Email                        | Password                                  |
+| ------------------ | ---------------------------- | ----------------------------------------- |
+| Successful login   | `demo@example.com`           | `Password123`                             |
+| Incorrect password | `demo@example.com`           | Any other password that passes validation |
+| Unknown account    | `other@example.com`          | Any password that passes validation       |
+| Attempt limit      | Repeat failed login attempts | -                                         |
 
----
+Form validation runs before authentication is simulated.
 
-## Project structure
+## Limitations
 
-```
-lib/
-  fake-auth.ts            # Simulates auth responses
-  auth-message-policy.ts  # Maps results to user-facing messages
-  validation.ts
-  types.ts
-components/
-  login/
-    login-form.tsx        # Main form logic
-    mode-toggle.tsx
-    feedback-message.tsx
-```
+Authentication and attempt limiting run entirely in the browser. The project does not implement real accounts, sessions or server-side enforcement.
