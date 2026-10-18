@@ -1,12 +1,10 @@
 # Authentication Feedback Demo
 
-<p align="center">
-  <img
+<img
     src="./public/preview.png"
     alt="Authentication form with selectable feedback modes"
     width="400"
   />
-</p>
 
 A frontend demonstration of how login feedback can disclose account information.
 
